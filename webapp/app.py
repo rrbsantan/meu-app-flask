@@ -217,7 +217,3 @@ def arquivo(filepath):
     if 'usuario' not in session:
         return "Acesso negado", 403
     return send_from_directory(HISTORICO_ROTAS, filepath)
-
-# --- EXECUÇÃO DO APP ---
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
