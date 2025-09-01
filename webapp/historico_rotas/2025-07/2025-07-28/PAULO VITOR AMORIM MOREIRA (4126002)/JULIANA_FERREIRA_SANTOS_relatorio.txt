@@ -1,0 +1,16 @@
+Supervisor: PAULO VITOR AMORIM MOREIRA (4126002)
+Vendedor: JULIANA FERREIRA SANTOS
+Data: 2025-07-28
+--- ROTA REALIZADA ---
+Distancia total percorrida: 22.98 km
+Combustivel total gasto: 2.30 litros
+Custo total estimado da gasolina: R$ 12.64
+Quantidade de visitas: 17
+--- ROTA PLANEJADA ---
+Distancia planejada: 23.51 km
+Combustivel planejado: 2.35 litros
+Custo planejado: R$ 12.93
+Visitas planejadas: 29
+--- COMPARATIVO ---
+Clientes dentro do planejado: 3
+Clientes fora do planejado: 8

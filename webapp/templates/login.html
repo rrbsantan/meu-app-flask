@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{{ url_for('static', filename='Fundo.png') }}') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-box {
+            background: #fff;
+            padding: 36px 32px 32px 32px;
+            border-radius: 14px;
+            box-shadow: 0 0 18px #d1d5db;
+            width: 340px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .login-title img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+        h2 {
+            color: #0a2a66;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.08em;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0a2a66;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.18em;
+            font-weight: 500;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #1976d2;
+        }
+        .erro {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="login-title">
+            <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+            <h2>Login</h2>
+        </div>
+        {% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
+        <form method="post" style="width:100%;">
+            <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+                <input type="text" name="email" placeholder="E-mail" required style="width:90%; text-align:center;">
+                <input type="password" name="senha" placeholder="Senha" required style="width:90%; text-align:center;">
+                <button type="submit" style="width:90%;">Entrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
