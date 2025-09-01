@@ -1,0 +1,16 @@
+Supervisor: PAULO VITOR AMORIM MOREIRA (4126002)
+Vendedor: ADHEMAR LINS DE MEDEIROS JUNIOR
+Data: 2025-07-30
+--- ROTA REALIZADA ---
+Distancia total percorrida: 31.26 km
+Combustivel total gasto: 3.13 litros
+Custo total estimado da gasolina: R$ 17.19
+Quantidade de visitas: 7
+--- ROTA PLANEJADA ---
+Distancia planejada: 21.75 km
+Combustivel planejado: 2.17 litros
+Custo planejado: R$ 11.96
+Visitas planejadas: 11
+--- COMPARATIVO ---
+Clientes dentro do planejado: 0
+Clientes fora do planejado: 5

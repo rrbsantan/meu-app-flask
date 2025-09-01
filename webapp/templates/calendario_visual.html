@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendário Visual - Gestão de Rotas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f3f4f6; }
+        .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px #0001; padding: 32px; }
+        h2 { color: #0a2a66; text-align: center; }
+        .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 18px; }
+        .calendar-day, .calendar-header { text-align: center; padding: 8px 0; }
+        .calendar-header { font-weight: bold; color: #0a2a66; background: #f3f4f6; border-radius: 4px; }
+        .calendar-day { background: #f9fafb; border-radius: 4px; cursor: pointer; }
+        .calendar-day[data-enabled="false"] { color: #bbb; background: #f3f4f6; cursor: not-allowed; }
+        .calendar-day[data-enabled="true"] { background: #0a2a66; color: #fff; font-weight: bold; }
+        .calendar-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .calendar-nav button { background: #0a2a66; color: #fff; border: none; border-radius: 4px; padding: 4px 12px; cursor: pointer; }
+        .calendar-nav span { font-weight: bold; }
+        .logout { float: right; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/logout" class="logout">Sair</a>
+        <h2>Bem-vindo, {{ nome }}</h2>
+        <div class="calendar-nav">
+            <button onclick="mudarMes(-1)">&lt;</button>
+            <span id="mesAno"></span>
+            <button onclick="mudarMes(1)">&gt;</button>
+        </div>
+        <div class="calendar" id="calendario"></div>
+    </div>
+    <script>
+        // Dias disponíveis vindos do backend
+        const diasDisponiveis = {{ dias_json|safe }};
+        let dataAtual = new Date();
+        if (diasDisponiveis.length > 0) {
+            // Se houver datas disponíveis, começa no mês da primeira data
+            dataAtual = new Date(diasDisponiveis[0]);
+        }
+        function renderizarCalendario() {
+            const calendario = document.getElementById('calendario');
+            calendario.innerHTML = '';
+            const mes = dataAtual.getMonth();
+            const ano = dataAtual.getFullYear();
+            document.getElementById('mesAno').innerText = dataAtual.toLocaleString('pt-BR', { month: 'long', year: 'numeric' });
+            // Cabeçalho dos dias da semana
+            const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            diasSemana.forEach(dia => {
+                const th = document.createElement('div');
+                th.className = 'calendar-header';
+                th.innerText = dia;
+                calendario.appendChild(th);
+            });
+            // Primeiro dia do mês
+            const primeiroDia = new Date(ano, mes, 1).getDay();
+            // Dias do mês
+            const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+            // Preenche dias vazios antes do primeiro dia
+            for (let i = 0; i < primeiroDia; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day';
+                empty.innerHTML = '';
+                calendario.appendChild(empty);
+            }
+            // Preenche os dias do mês
+            for (let dia = 1; dia <= diasNoMes; dia++) {
+                const dataStr = `${ano}-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+                const enabled = diasDisponiveis.includes(dataStr);
+                const div = document.createElement('div');
+                div.className = 'calendar-day';
+                div.innerText = dia;
+                div.setAttribute('data-enabled', enabled);
+                if (enabled) {
+                    div.onclick = () => { window.location.href = '/cards/' + dataStr; };
+                }
+                calendario.appendChild(div);
+            }
+        }
+        function mudarMes(delta) {
+            dataAtual.setMonth(dataAtual.getMonth() + delta);
+            renderizarCalendario();
+        }
+        renderizarCalendario();
+    </script>
+</body>
+</html>

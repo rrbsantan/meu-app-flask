@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Perguntas de Segurança</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f3f4f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; width: 350px; }
+        h1 { color: #0a2a66; }
+        .erro { color: #d63031; margin-bottom: 1rem; }
+        label { display: block; text-align: left; margin-bottom: 0.5rem; font-weight: bold; color: #333; }
+        input { width: 100%; padding: 0.7rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 0.8rem; background-color: #0a2a66; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        button:hover { background-color: #0055a4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Perguntas de Segurança</h1>
+        <p>Responda para confirmar sua identidade.</p>
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+        <form method="post">
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="text" name="data_nascimento" placeholder="DD/MM/AAAA" required>
+            
+            <label for="nome_mae">Nome completo da sua mãe:</label>
+            <input type="text" name="nome_mae" placeholder="Nome da mãe" required>
+            
+            <button type="submit">Verificar</button>
+        </form>
+    </div>
+</body>
+</html>

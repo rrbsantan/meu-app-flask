@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendário - Gestão de Rotas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f3f4f6; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px #0001; padding: 32px; }
+        h2 { color: #0a2a66; text-align: center; }
+        .logout { float: right; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 10px 0; }
+        a { color: #0a2a66; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <a href="/logout" class="logout">Sair</a>
+    <h2>Bem-vindo, {{ nome }}</h2>
+    <h3>Datas disponíveis</h3>
+        {% if datas %}
+            <ul>
+            {% for data in datas %}
+                <li><a href="{{ url_for('cards', data=data) }}">{{ data }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhuma data disponível.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
