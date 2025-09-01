@@ -145,14 +145,12 @@ def _listar_arquivos(coord_path):
             vendedores.add(nome[:-5])
     for v in vendedores:
         card = {}
-        card['nome'] = v.replace('_', ' ')
-        card['planilha'] = os.path.join(coord_path, f"{v}.xlsx")
-        card['mapa_html'] = os.path.join(coord_path, f"{v}_mapa.html")
+        base_historico = os.path.relpath(coord_path, os.path.join(os.path.dirname(__file__), 'historico_rotas')).replace('\\', '/')
+        card['planilha'] = f"{base_historico}/{v}.xlsx"
+        card['mapa_html'] = f"{base_historico}/{v}_mapa.html"
         miniatura_path = os.path.join(coord_path, f"{v}_mapa.png")
         if os.path.exists(miniatura_path):
-            # Caminho relativo para servir via Flask
-            rel_path = os.path.relpath(miniatura_path, os.path.dirname(os.path.abspath(__file__)))
-            card['miniatura'] = rel_path.replace('\\', '/').replace('\\', '/')
+            card['miniatura'] = f"{base_historico}/{v}_mapa.png"
         else:
             card['miniatura'] = ""
         card['relatorio'] = os.path.join(coord_path, f"{v}_relatorio.txt")
